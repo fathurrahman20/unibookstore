@@ -25,6 +25,7 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        "Cache-Control": "no-store",
       },
       body: JSON.stringify(publisher),
     });

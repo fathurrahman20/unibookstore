@@ -13,7 +13,12 @@ export const PATCH = async (
     },
     data: body,
   });
-  return NextResponse.json(publisher, { status: 200 });
+  return NextResponse.json(publisher, {
+    status: 200,
+    headers: {
+      "Cache-Control": "no-store",
+    },
+  });
 };
 
 export const DELETE = async (
