@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Publisher {
-  id        String   @unique
+  id        String   @id @db.VarChar(255)
   name      String   @db.VarChar(255)
   address   String   @db.VarChar(255)
   city      String   @db.VarChar(255)
@@ -27,7 +27,7 @@ model Publisher {
 }
 
 model Book {
-  id          String    @unique
+  id          String    @id @db.VarChar(255)
   category    String    @db.VarChar(255)
   title       String    @db.VarChar(255)
   price       Int       @db.Integer
