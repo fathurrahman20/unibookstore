@@ -116,7 +116,7 @@ const AddPenerbit = ({ publishers }: { publishers: Publisher[] }) => {
             </div>
             <div className="form-control w-full">
               <label htmlFor="phone" className="label font-bold">
-                Phone
+                Telepon
               </label>
               <input
                 type="number"
