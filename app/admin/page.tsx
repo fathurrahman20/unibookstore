@@ -1,30 +1,23 @@
-import { Book, Publisher } from "@prisma/client";
-import { prisma } from "../application/database";
+"use client";
+
 import TabAdminMenu from "./tab-admin-menu";
+import { useEffect, useState } from "react";
 
-export async function getServerSideProps() {
-  const [books, publishers] = await Promise.all([
-    prisma.book.findMany({
-      include: { publisher: true },
-    }),
-    prisma.publisher.findMany(),
-  ]);
+const Product = () => {
+  const [books, setBooks] = useState([]);
+  const [publishers, setPublishers] = useState([]);
 
-  return {
-    props: {
-      books,
-      publishers,
-    },
-  };
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      const booksResponse = await fetch("/api/books");
+      const publishersResponse = await fetch("/api/publishers");
 
-const Product = ({
-  books,
-  publishers,
-}: {
-  books: Book[];
-  publishers: Publisher[];
-}) => {
+      setBooks(await booksResponse.json());
+      setPublishers(await publishersResponse.json());
+    };
+
+    fetchData();
+  }, []);
   return (
     <div>
       <TabAdminMenu books={books} publishers={publishers} />
