@@ -23,6 +23,9 @@ const AddPenerbit = ({ publishers }: { publishers: Publisher[] }) => {
     e.preventDefault();
 
     await fetch("/api/publishers", {
+      next: {
+        revalidate: 0,
+      },
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,6 +67,7 @@ const AddPenerbit = ({ publishers }: { publishers: Publisher[] }) => {
                 }
                 className="input input-bordered"
                 placeholder="ID Penerbit"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -80,6 +84,7 @@ const AddPenerbit = ({ publishers }: { publishers: Publisher[] }) => {
                 }
                 className="input input-bordered"
                 placeholder="Nama"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -96,6 +101,7 @@ const AddPenerbit = ({ publishers }: { publishers: Publisher[] }) => {
                 }
                 className="input input-bordered"
                 placeholder="Alamat"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -112,6 +118,7 @@ const AddPenerbit = ({ publishers }: { publishers: Publisher[] }) => {
                 }
                 className="input input-bordered"
                 placeholder="Kota"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -119,14 +126,19 @@ const AddPenerbit = ({ publishers }: { publishers: Publisher[] }) => {
                 Telepon
               </label>
               <input
-                type="number"
+                type="text"
                 name="phone"
                 id="phone"
                 value={publisher.phone}
-                onChange={(e) =>
-                  setPublisher({ ...publisher, phone: e.target.value })
-                }
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^[0-9-]*$/.test(value)) {
+                    setPublisher({ ...publisher, phone: value });
+                  }
+                }}
                 className="input input-bordered"
+                minLength={11}
+                required
               />
             </div>
             <div className="modal-action">

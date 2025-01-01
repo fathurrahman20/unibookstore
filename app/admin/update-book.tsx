@@ -30,6 +30,9 @@ const UpdateBook = ({
     e.preventDefault();
 
     await fetch(`/api/books/${book.id}`, {
+      next: {
+        revalidate: 0,
+      },
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -44,11 +47,11 @@ const UpdateBook = ({
   return (
     <div>
       <button className="btn btn-sm" onClick={handleModal}>
-        Update
+        Edit
       </button>
       <div className={isOpen ? "modal modal-open" : "modal"}>
         <div className="modal-box">
-          <h2 className="font-bold mb-3">Update Buku {books.title}</h2>
+          <h2 className="font-bold mb-3">Edit Buku {books.title}</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-control w-full">
               <label htmlFor="id" className="label font-bold">
@@ -62,6 +65,7 @@ const UpdateBook = ({
                 onChange={(e) => setBook({ ...book, id: e.target.value })}
                 className="input input-bordered"
                 placeholder="ID Buku"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -76,6 +80,7 @@ const UpdateBook = ({
                 onChange={(e) => setBook({ ...book, category: e.target.value })}
                 className="input input-bordered"
                 placeholder="Kategori"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -90,6 +95,7 @@ const UpdateBook = ({
                 onChange={(e) => setBook({ ...book, title: e.target.value })}
                 className="input input-bordered"
                 placeholder="Nama Buku"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -104,6 +110,7 @@ const UpdateBook = ({
                 onChange={(e) => setBook({ ...book, price: +e.target.value })}
                 className="input input-bordered"
                 placeholder="Harga"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -117,6 +124,7 @@ const UpdateBook = ({
                 value={book.stock}
                 onChange={(e) => setBook({ ...book, stock: +e.target.value })}
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control w-full">

@@ -22,6 +22,9 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
     e.preventDefault();
 
     await fetch(`/api/publishers/${publisher.id}`, {
+      next: {
+        revalidate: 0,
+      },
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -37,11 +40,11 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
   return (
     <div>
       <button className="btn btn-sm" onClick={handleModal}>
-        Update
+        Edit
       </button>
       <div className={isOpen ? "modal modal-open" : "modal"}>
         <div className="modal-box">
-          <h2 className="font-bold mb-3">Update Buku {publishers.name}</h2>
+          <h2 className="font-bold mb-3">Edit Buku {publishers.name}</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-control w-full">
               <label htmlFor="id" className="label font-bold">
@@ -57,6 +60,7 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
                 }
                 className="input input-bordered"
                 placeholder="ID Penerbit"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -73,6 +77,7 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
                 }
                 className="input input-bordered"
                 placeholder="Nama"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -89,6 +94,7 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
                 }
                 className="input input-bordered"
                 placeholder="Alamat"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -105,6 +111,7 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
                 }
                 className="input input-bordered"
                 placeholder="Kota"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -120,6 +127,7 @@ const UpdatePublisher = ({ publishers }: { publishers: Publisher }) => {
                   setPublisher({ ...publisher, phone: e.target.value })
                 }
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="modal-action">

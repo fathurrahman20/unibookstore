@@ -6,7 +6,6 @@ import { SyntheticEvent, useEffect, useState } from "react";
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
 
-  // update state on toggle
   interface ToggleEvent extends SyntheticEvent {
     target: HTMLInputElement;
   }
@@ -19,11 +18,9 @@ const Navbar = () => {
     }
   };
 
-  // set theme state in localstorage on mount & also update localstorage on state change
   useEffect(() => {
     localStorage.setItem("theme", theme);
     const localTheme = localStorage.getItem("theme") || "light";
-    // add custom data-theme attribute to html tag required to update theme using DaisyUI
     document.querySelector("html")?.setAttribute("data-theme", localTheme);
   }, [theme]);
   return (

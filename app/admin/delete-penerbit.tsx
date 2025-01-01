@@ -14,6 +14,9 @@ const DeletePublisher = ({ publisher }: { publisher: Publisher }) => {
 
   const handleDelete = async (publisherId: string) => {
     await fetch(`/api/publishers/${publisherId}`, {
+      next: {
+        revalidate: 0,
+      },
       method: "DELETE",
     });
     router.refresh();

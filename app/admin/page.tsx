@@ -1,23 +1,22 @@
-"use client";
-
+import { prisma } from "../application/database";
 import TabAdminMenu from "./tab-admin-menu";
-import { useEffect, useState } from "react";
 
-const Product = () => {
-  const [books, setBooks] = useState([]);
-  const [publishers, setPublishers] = useState([]);
+const getBooks = async () => {
+  const response = await prisma.book.findMany({
+    include: {
+      publisher: true,
+    },
+  });
+  return response;
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const booksResponse = await fetch("/api/books");
-      const publishersResponse = await fetch("/api/publishers");
+const getPublisher = async () => {
+  const response = await prisma.publisher.findMany();
+  return response;
+};
 
-      setBooks(await booksResponse.json());
-      setPublishers(await publishersResponse.json());
-    };
-
-    fetchData();
-  }, []);
+const Book = async () => {
+  const [books, publishers] = await Promise.all([getBooks(), getPublisher()]);
   return (
     <div>
       <TabAdminMenu books={books} publishers={publishers} />
@@ -25,4 +24,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Book;

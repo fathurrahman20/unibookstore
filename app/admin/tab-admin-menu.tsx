@@ -61,8 +61,8 @@ const TabAdminMenu = ({
                     }
                   </td>
                   <td className="flex justify-center space-x-2 text-center">
-                    <DeleteBook book={book} />
                     <UpdateBook books={book} publishers={publishers} />
+                    <DeleteBook book={book} />
                   </td>
                 </tr>
               ))}
@@ -105,8 +105,8 @@ const TabAdminMenu = ({
                   <td>{publisher.city}</td>
                   <td>{publisher.phone}</td>
                   <td className="flex justify-center space-x-2 text-center">
-                    <DeletePublisher publisher={publisher} />
                     <UpdatePublisher publishers={publisher} />
+                    <DeletePublisher publisher={publisher} />
                   </td>
                 </tr>
               ))}

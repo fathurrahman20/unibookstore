@@ -14,6 +14,9 @@ const DeleteBook = ({ book }: { book: Book }) => {
 
   const handleDelete = async (bookId: string) => {
     await fetch(`/api/books/${bookId}`, {
+      next: {
+        revalidate: 0,
+      },
       method: "DELETE",
     });
     router.refresh();

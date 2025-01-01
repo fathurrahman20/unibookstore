@@ -24,6 +24,9 @@ const AddBook = ({ publishers }: { publishers: Publisher[] }) => {
     e.preventDefault();
 
     await fetch("/api/books", {
+      next: {
+        revalidate: 0,
+      },
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,6 +67,7 @@ const AddBook = ({ publishers }: { publishers: Publisher[] }) => {
                 onChange={(e) => setBook({ ...book, id: e.target.value })}
                 className="input input-bordered"
                 placeholder="ID Buku"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -78,6 +82,7 @@ const AddBook = ({ publishers }: { publishers: Publisher[] }) => {
                 onChange={(e) => setBook({ ...book, category: e.target.value })}
                 className="input input-bordered"
                 placeholder="Kategori"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -92,6 +97,7 @@ const AddBook = ({ publishers }: { publishers: Publisher[] }) => {
                 onChange={(e) => setBook({ ...book, title: e.target.value })}
                 className="input input-bordered"
                 placeholder="Nama Buku"
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -106,6 +112,8 @@ const AddBook = ({ publishers }: { publishers: Publisher[] }) => {
                 onChange={(e) => setBook({ ...book, price: +e.target.value })}
                 className="input input-bordered"
                 placeholder="Harga"
+                min={0}
+                required
               />
             </div>
             <div className="form-control w-full">
@@ -119,6 +127,8 @@ const AddBook = ({ publishers }: { publishers: Publisher[] }) => {
                 value={book.stock}
                 onChange={(e) => setBook({ ...book, stock: +e.target.value })}
                 className="input input-bordered"
+                min={0}
+                required
               />
             </div>
             <div className="form-control w-full">
